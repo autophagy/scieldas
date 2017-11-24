@@ -6,10 +6,10 @@ Design
 ======
 
 - Font: Inconsolata
-- Font size: 16?
+- Font size: 14px
 - Font Colour: #EBEBEB
 - Background Colour: #2D2D2D
-- Padding: 23px?
+- Padding: 16px
 
 Documentation
 =============
