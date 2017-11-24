@@ -25,10 +25,15 @@ def index():
             "<p>Shields for software READMES</p>")
 
 # Read The Docs
-@app.route("/rtd/<project>")
+@app.route("/rtd/<project>.svg")
 def rtd(project):
-    return("<h1>Read The Docs</h1>\n"
-           "<p>Return RTD build status for :: {}".format(project))
+    api = slumber.API(base_url='http://readthedocs.org/api/v1/')
+    v = api.version(project).get(slug="latest")
+
+    built_map = {True: 'Passing', False: 'Failing'}
+
+    return(generate_svg("Docs :: {}".format(
+        built_map[v['objects'][0]['built']])))
 
 # Travis
 @app.route("/travis/<project>")
