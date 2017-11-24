@@ -3,6 +3,7 @@ app = Flask(__name__)
 
 import slumber
 import svgwrite
+from collections import defaultdict
 
 def generate_svg_response(text):
 
@@ -60,10 +61,14 @@ def pyversions(project):
            "<p>Return the supported python versions for :: {}".format(project))
 
 # Licenses
-@app.route("/licenses/<license>")
+@app.route("/licenses/<license>.svg")
 def licenses(license):
-    return("<h1>license</h1>\n"
-           "<p>Return license badge for {} license</p>".format(project))
+
+    licenses = defaultdict(lambda: 'Unknown', {'apache': 'Apache 2',
+                                               'gpl': 'GPL 3',
+                                               'mit': 'MIT'})
+
+    return(generate_svg_response(licenses[license]))
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=8080)
