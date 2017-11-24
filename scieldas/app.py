@@ -1,6 +1,23 @@
 from flask import Flask
 app = Flask(__name__)
 
+import slumber
+import svgwrite
+
+def generate_svg(text):
+
+    # Width is our twice our padding (2*16) plus 7 pixels per character
+    svg = svgwrite.Drawing(size = ("{}px".format((len(text)*7)+32), "41px"))
+    text_style = ("font-size: 14px; "
+                  "font-family: Inconsolata, monospace;"
+                  "text-align: center")
+    scield_rect = svg.rect(size=('100%', '100%'), fill='#2D2D2D')
+    scield_text = svg.text(text, insert=(16, 24), fill="#F2F2F2", style=text_style)
+
+    svg.add(scield_rect)
+    svg.add(scield_text)
+    return svg.tostring()
+
 
 @app.route("/")
 def index():
@@ -20,10 +37,14 @@ def travis(project):
            "<p>Return Travis build status for :: {}".format(project))
 
 # PyPi
-@app.route("/pypi/version/<project>")
+@app.route("/pypi/version/<project>.svg")
 def pypi_version(project):
-    return("<h1>PyPi Version</h1>\n"
-           "<p>Return latest PyPi version for :: {}".format(project))
+
+    api = slumber.API(base_url='https://pypi.python.org/pypi/')
+    api_to_call = getattr(api, project)
+    v = api_to_call('json').get()
+
+    return(generate_svg("PyPi :: {}".format(v['info']['version'])))
 
 @app.route("/pypi/pyversions/<project>")
 def pyversions(project):
@@ -38,4 +59,3 @@ def licenses(license):
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=8080)
-
