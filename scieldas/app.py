@@ -1,10 +1,10 @@
-from flask import Flask
+from flask import Flask, make_response
 app = Flask(__name__)
 
 import slumber
 import svgwrite
 
-def generate_svg(text):
+def generate_svg_response(text):
 
     # Width is our twice our padding (2*16) plus 7 pixels per character
     svg = svgwrite.Drawing(size = ("{}px".format((len(text)*7)+32), "41px"))
@@ -16,7 +16,10 @@ def generate_svg(text):
 
     svg.add(scield_rect)
     svg.add(scield_text)
-    return svg.tostring()
+
+    response = make_response(svg.tostring())
+    response.content_type = 'image/svg+xml'
+    return response
 
 
 @app.route("/")
@@ -32,7 +35,7 @@ def rtd(project):
 
     built_map = {True: 'Passing', False: 'Failing'}
 
-    return(generate_svg("Docs :: {}".format(
+    return(generate_svg_response("Docs :: {}".format(
         built_map[v['objects'][0]['built']])))
 
 # Travis
@@ -49,7 +52,7 @@ def pypi_version(project):
     api_to_call = getattr(api, project)
     v = api_to_call('json').get()
 
-    return(generate_svg("PyPi :: {}".format(v['info']['version'])))
+    return(generate_svg_response("PyPi :: {}".format(v['info']['version'])))
 
 @app.route("/pypi/pyversions/<project>")
 def pyversions(project):
