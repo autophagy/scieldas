@@ -1,8 +1,8 @@
 from flask import Flask, make_response, redirect
 application = Flask(__name__)
 
-import api
-import svg_creator
+from . import api
+from . import svg_creator
 
 
 def create_svg_response(svg):
