@@ -10,10 +10,15 @@ Built with Flask and Docker, probably. `Specification`_.
 Running Scieldas
 ================
 
-Running the Scieldas service requires `Docker`_::
+Running the Scieldas service requires `Docker`_. You can either build it
+yourself::
 
     $ docker build -t "autophagy:scieldas" .
     $ docker run -d --name=scieldas -p 80:8080 --env TRAVIS_API_KEY=key autophagy:scieldas
+
+Or pull the image from `Docker Hub`_ ::
+    $ docker pull autophagy/scieldas
+    $ docker run -d --name=scieldas -p 80:8080 --env TRAVIS_API_KEY=key autophagy/scieldas
 
 When running the container, replace the ``key`` in the Travis API env variable
 with your own key. To generate a key, see the `Travis API documentation`_.
@@ -80,4 +85,5 @@ Licenses
 
 .. _Specification: spec/spec.rst
 .. _Docker: https://www.docker.com
+.. _Docker Hub: https://hub.docker.com/r/autophagy/scieldas/
 .. _Travis API documentation: https://docs.travis-ci.com/api#authentication
