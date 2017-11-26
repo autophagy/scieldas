@@ -18,6 +18,17 @@ BUTTON_BASE_TEXT = {
 def _create_api(key, append_slash=False):
     return slumber.API(base_url=API_BASE_URL[key], append_slash=append_slash)
 
+def _format_pyversions(classifiers):
+    # Pyversions will come in the format 'Programming Language :: Python :: 3.6'
+    pyversion_specifier = 'Programming Language :: Python :: '
+
+    pyversions = list(filter(lambda x: pyversion_specifier in x, classifiers))
+
+    pyversions_filter = list(map(lambda x: x.replace(pyversion_specifier, ''),
+                          pyversions))
+
+    return ', '.join(pyversions_filter)
+
 def get_rtd_build_status(project):
     api = _create_api('rtd')
     rtd_status = api.version(project).get(slug="latest")
@@ -46,8 +57,13 @@ def get_pypi_version(project):
 
     return BUTTON_BASE_TEXT['pypi version'].format(pypi_json['info']['version'])
 
-def get_pypi_pyversions():
-    return True
+def get_pypi_pyversions(project):
+    api = _create_api('pypi')
+    pypi_project = getattr(api, project)
+    pypi_json = pypi_project('json').get()
+
+    classifiers = pypi_json['info']['classifiers']
+    return BUTTON_BASE_TEXT['pypi pyversions'].format(_format_pyversions(classifiers))
 
 def get_license(license):
     licenses = defaultdict(lambda: 'Unknown', {'apache': 'Apache 2',

@@ -33,10 +33,10 @@ def pypi_version(project):
     svg = svg_creator.create_svg(api.get_pypi_version, project)
     return create_svg_response(svg)
 
-@app.route("/pypi/pyversions/<project>")
+@app.route("/pypi/pyversions/<project>.svg")
 def pyversions(project):
-    return("<h1>PyPi Python Versions/h1>\n"
-           "<p>Return the supported python versions for :: {}".format(project))
+    svg = svg_creator.create_svg(api.get_pypi_pyversions, project)
+    return create_svg_response(svg)
 
 # Licenses
 @app.route("/licenses/<license>.svg")
