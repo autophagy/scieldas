@@ -1,6 +1,7 @@
 import slumber
 import os
 from collections import defaultdict
+import re
 
 API_BASE_URL = {
    'rtd': 'http://readthedocs.org/api/v1/',
@@ -20,14 +21,18 @@ def _create_api(key, append_slash=False):
 
 def _format_pyversions(classifiers):
     # Pyversions will come in the format 'Programming Language :: Python :: 3.6'
-    pyversion_specifier = 'Programming Language :: Python :: '
+    pattern = '^Programming Language :: Python :: ([\d.]+)$'
+    versions = []
 
-    pyversions = list(filter(lambda x: pyversion_specifier in x, classifiers))
+    for classifer in classifiers:
+        match = re.search(pattern, classifer)
+        if match and match.group(1):
+            versions.append(match.group(1))
 
-    pyversions_filter = list(map(lambda x: x.replace(pyversion_specifier, ''),
-                          pyversions))
+    # Only show major versions if no major.minor appears
 
-    return ', '.join(pyversions_filter)
+    versions = list(filter(lambda x: x not in ['2', '3'], versions))
+    return ', '.join(versions)
 
 def get_rtd_build_status(project):
     api = _create_api('rtd')
