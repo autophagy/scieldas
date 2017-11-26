@@ -4,6 +4,7 @@ app = Flask(__name__)
 import slumber
 import svgwrite
 from collections import defaultdict
+import os
 
 def generate_svg_response(text):
 
@@ -40,10 +41,16 @@ def rtd(project):
         built_map[v['objects'][0]['built']])))
 
 # Travis
-@app.route("/travis/<project>")
-def travis(project):
-    return("<h1>Travis</h1>\n"
-           "<p>Return Travis build status for :: {}".format(project))
+@app.route("/travis/<user>/<project>.svg")
+def travis(user, project):
+
+    travis_statuses = {0: 'Passing', 1: 'Failing'}
+    api = slumber.API(base_url='https://api.travis-ci.org/', append_slash=False)
+    api_to_call = getattr(api.repos, user)
+    v = api_to_call(project).get(headers={'Authorization':
+                                            'token {}'.format(os.environ['TRAVIS_API_KEY'])})
+
+    return (generate_svg_response("Build :: {}".format(travis_statuses[v['last_build_status']])))
 
 # PyPi
 @app.route("/pypi/version/<project>.svg")
