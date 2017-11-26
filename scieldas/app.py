@@ -1,4 +1,4 @@
-from flask import Flask, make_response
+from flask import Flask, make_response, redirect
 application = Flask(__name__)
 
 import api
@@ -12,8 +12,7 @@ def create_svg_response(svg):
 
 @application.route("/")
 def index():
-    return("<h1>Scieldas</h1>\n"
-            "<p>Shields for software READMES</p>")
+    return redirect("https://github.com/autophagy/scieldas", code=302)
 
 # Read The Docs
 @application.route("/rtd/<project>.svg")
