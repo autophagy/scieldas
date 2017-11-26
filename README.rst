@@ -7,8 +7,22 @@ Badges for software projects. Aiming to initially support Travis, RTD, PyPi
 
 Built with Flask and Docker, probably. `Specification`_.
 
+Running Scieldas
+================
+
+Running the Scieldas service requires `Docker`_::
+
+    $ docker build -t "autophagy:scieldas" .
+    $ docker run -d --name=scieldas -p 80:8080 --env TRAVIS_API_KEY=key autophagy:scieldas
+
+When running the container, replace the ``key`` in the Travis API env variable
+with your own key. To generate a key, see the `Travis API documentation`_.
+
+Button Examples
+===============
+
 Read The Docs
-=============
+-------------
 
 .. image:: spec/examples/rtd/Docs-Passing.png
     :target: _
@@ -24,7 +38,7 @@ Read The Docs
 
 
 Travis
-======
+------
 
 .. image:: spec/examples/travis/Build-Passing.png
     :target: _
@@ -39,7 +53,7 @@ Travis
     :alt: Travis Build Unknown
 
 PyPi
-====
+----
 
 .. image:: spec/examples/pypi/Pypi-Version.png
     :target: _
@@ -49,8 +63,8 @@ PyPi
     :target: _
     :alt: Python Versions
 
-licenses
-========
+Licenses
+--------
 
 .. image:: spec/examples/licenses/Apache.png
     :target: _
@@ -65,3 +79,5 @@ licenses
     :alt: MIT license
 
 .. _Specification: spec/spec.rst
+.. _Docker: https://www.docker.com
+.. _Travis API documentation: https://docs.travis-ci.com/api#authentication

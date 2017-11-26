@@ -1,0 +1,3 @@
+Flask==0.12.2
+slumber==0.7.1
+svgwrite==1.1.11
