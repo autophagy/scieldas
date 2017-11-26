@@ -74,4 +74,4 @@ def get_license(license):
     licenses = defaultdict(lambda: 'Unknown', {'apache': 'Apache 2',
                                                'gpl': 'GPL 3',
                                                'mit': 'MIT'})
-    return licenses[license]
+    return licenses[license.lower()]
