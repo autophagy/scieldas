@@ -4,9 +4,10 @@ from collections import defaultdict
 import re
 
 API_BASE_URL = {
-   'rtd': 'http://readthedocs.org/api/v1/',
+   'rtd': 'https://readthedocs.org/api/v1/',
    'travis': 'https://api.travis-ci.org/',
    'pypi': 'https://pypi.python.org/pypi/',
+   'dockerhub': 'https://hub.docker.com/v2/'
 }
 
 BUTTON_BASE_TEXT = {
@@ -14,6 +15,7 @@ BUTTON_BASE_TEXT = {
     'travis': 'Build :: {}',
     'pypi version': 'PyPi :: {}',
     'pypi pyversions': 'Python :: {}',
+    'dockerhub': 'Docker :: {}',
 }
 
 def _create_api(key, append_slash=False):
@@ -87,6 +89,22 @@ def get_pypi_pyversions(project):
         return BUTTON_BASE_TEXT['pypi pyversions'].format(_format_pyversions(classifiers))
     except slumber.exceptions.HttpNotFoundError:
         return BUTTON_BASE_TEXT['pypi pyversions'].format("Unknown")
+
+def get_docker_build_status(user, project):
+    try:
+        api = _create_api('dockerhub')
+        user_api = getattr(api.repositories, user)
+        latest_builds = user_api(project).buildhistory.get()
+
+        latest_build_result = latest_builds['results'][0]['status']
+        if latest_build_result == 10:
+            return BUTTON_BASE_TEXT['dockerhub'].format('Passing')
+        elif latest_build_result < 0:
+            return BUTTON_BASE_TEXT['dockerhub'].format('Failing')
+        else:
+            return BUTTON_BASE_TEXT['dockerhub'].format('Building')
+    except slumber.exceptions.HttpNotFoundError:
+        return BUTTON_BASE_TEXT['dockerhub'].format('Unknown')
 
 def get_license(license):
     licenses = defaultdict(lambda: 'Unknown', {'apache': 'Apache 2',

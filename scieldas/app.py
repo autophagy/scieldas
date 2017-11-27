@@ -38,6 +38,13 @@ def pyversions(project):
     svg = svg_creator.create_svg(api.get_pypi_pyversions, project)
     return create_svg_response(svg)
 
+# Dockerhub
+
+@application.route("/dockerhub/build/<user>/<project>.svg")
+def docker_build(user, project):
+    svg = svg_creator.create_svg(api.get_docker_build_status, user, project)
+    return create_svg_response(svg)
+
 # Licenses
 @application.route("/licenses/<license>.svg")
 def licenses(license):

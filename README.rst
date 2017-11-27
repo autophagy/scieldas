@@ -2,6 +2,15 @@
 Scieldas
 ========
 
+.. image:: http://scieldas.autophagy.io/dockerhub/build/autophagy/scieldas.svg
+   :target: https://hub.docker.com/r/autophagy/scieldas/
+   :alt: Docker Build Status
+
+.. image:: http://scieldas.autophagy.io/licenses/MIT.svg
+   :target: LICENSE
+   :alt: MIT License
+
+
 Badges for software projects. Aiming to initially support Travis, RTD, PyPi
 (version and pyversions) and licenses (Apache, GPL, MIT).
 
