@@ -8,6 +8,7 @@ from . import svg_creator
 def create_svg_response(svg):
     response = make_response(svg.tostring())
     response.content_type = 'image/svg+xml'
+    response.cache_control.max_age = 60
     return response
 
 @application.route("/")
