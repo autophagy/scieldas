@@ -35,40 +35,58 @@ def _format_pyversions(classifiers):
     return ', '.join(versions)
 
 def get_rtd_build_status(project):
-    api = _create_api('rtd')
-    rtd_status = api.version(project).get(slug="latest")
+    try:
+        api = _create_api('rtd')
+        rtd_status = api.version(project).get(slug="latest")
 
-    if rtd_status['objects'][0]['built']:
-        return BUTTON_BASE_TEXT['rtd'].format('Passing')
-    else:
-        return BUTTON_BASE_TEXT['rtd'].format('Failing')
+        if len(rtd_status['objects']) > 0:
+            if rtd_status['objects'][0]['built']:
+                return BUTTON_BASE_TEXT['rtd'].format('Passing')
+            else:
+                return BUTTON_BASE_TEXT['rtd'].format('Failing')
+        else:
+            return BUTTON_BASE_TEXT['rtd'].format('Unknown')
+    except slumber.exceptions.HttpNotFoundError:
+        return BUTTON_BASE_TEXT['rtd'].format('Unknown')
 
 def get_travis_build_status(user, project):
-    api = _create_api('travis')
-    user_api = getattr(api.repos, user)
-    token = os.environ['TRAVIS_API_KEY']
-    travis_project = user_api(project) \
-        .get(headers={'Authorization':'token {}'.format(token)})
+    try:
+        api = _create_api('travis')
+        user_api = getattr(api.repos, user)
+        token = os.environ['TRAVIS_API_KEY']
+        travis_project = user_api(project) \
+            .get(headers={'Authorization':'token {}'.format(token)})
 
-    if travis_project['last_build_status'] == 0:
-        return BUTTON_BASE_TEXT['travis'].format('Passing')
-    else:
-        return BUTTON_BASE_TEXT['travis'].format('Failing')
+        if travis_project['last_build_status'] == 0:
+            return BUTTON_BASE_TEXT['travis'].format('Passing')
+        elif travis_project['last_build_status'] == 1:
+            return BUTTON_BASE_TEXT['travis'].format('Failing')
+        else:
+            return BUTTON_BASE_TEXT['travis'].format('Unknown')
+    except slumber.exceptions.HttpNotFoundError:
+        return BUTTON_BASE_TEXT['travis'].format('Unknown')
 
 def get_pypi_version(project):
-    api = _create_api('pypi')
-    pypi_project = getattr(api, project)
-    pypi_json = pypi_project('json').get()
+    try:
+        api = _create_api('pypi')
+        pypi_project = getattr(api, project)
+        pypi_json = pypi_project('json').get()
 
-    return BUTTON_BASE_TEXT['pypi version'].format(pypi_json['info']['version'])
+        return BUTTON_BASE_TEXT['pypi version'].format(pypi_json['info']['version'])
+    except slumber.exceptions.HttpNotFoundError:
+        return BUTTON_BASE_TEXT['pypi version'].format("Unknown")
+
 
 def get_pypi_pyversions(project):
-    api = _create_api('pypi')
-    pypi_project = getattr(api, project)
-    pypi_json = pypi_project('json').get()
+    try:
+        api = _create_api('pypi')
+        pypi_project = getattr(api, project)
+        pypi_json = pypi_project('json').get()
 
-    classifiers = pypi_json['info']['classifiers']
-    return BUTTON_BASE_TEXT['pypi pyversions'].format(_format_pyversions(classifiers))
+        classifiers = pypi_json['info']['classifiers']
+        return BUTTON_BASE_TEXT['pypi pyversions'].format(_format_pyversions(classifiers))
+    except slumber.exceptions.HttpNotFoundError:
+        return BUTTON_BASE_TEXT['pypi pyversions'].format("Unknown")
 
 def get_license(license):
     licenses = defaultdict(lambda: 'Unknown', {'apache': 'Apache 2',
