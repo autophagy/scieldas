@@ -17,6 +17,7 @@ yourself::
     $ docker run -d --name=scieldas -p 80:8080 --env TRAVIS_API_KEY=key autophagy:scieldas
 
 Or pull the image from `Docker Hub`_ ::
+
     $ docker pull autophagy/scieldas
     $ docker run -d --name=scieldas -p 80:8080 --env TRAVIS_API_KEY=key autophagy/scieldas
 
