@@ -8,4 +8,4 @@ ADD README.rst /app/README.rst
 WORKDIR /app
 RUN pip install e .
 ENTRYPOINT ["gunicorn"]
-CMD ["--bind", "0.0.0.0:8080", "scieldas"]
+CMD ["--bind", "0.0.0.0:80", "scieldas"]
