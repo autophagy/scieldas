@@ -2,11 +2,11 @@
 Scieldas
 ========
 
-.. image:: http://scieldas.autophagy.io/dockerhub/build/autophagy/scieldas.svg
+.. image:: http://scieldas.autophagy.io/dockerhub/build/autophagy/scieldas.png
    :target: https://hub.docker.com/r/autophagy/scieldas/
    :alt: Docker Build Status
 
-.. image:: http://scieldas.autophagy.io/licenses/MIT.svg
+.. image:: http://scieldas.autophagy.io/licenses/MIT.png
    :target: LICENSE
    :alt: MIT License
 
