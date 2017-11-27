@@ -15,6 +15,8 @@ def create_svg(text_func, *func_params):
     scield_rect = svg.rect(size=('100%', '100%'), fill='#2D2D2D')
     scield_text = svg.text(text, insert=(16, 24), fill="#F2F2F2", style=text_style)
 
+    svg.defs.add(svg.style("@import url('https://fonts.googleapis.com/css?family=Inconsolata');"))
+
     svg.add(scield_rect)
     svg.add(scield_text)
     return svg
