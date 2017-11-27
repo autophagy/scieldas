@@ -1,5 +1,5 @@
 import svgwrite
-
+import wand.image
 
 def create_svg(text_func, *func_params):
 
@@ -20,3 +20,11 @@ def create_svg(text_func, *func_params):
     svg.add(scield_rect)
     svg.add(scield_text)
     return svg
+
+def create_png(text_func, *func_params):
+
+    svg = create_svg(text_func, *func_params)
+
+    with wand.image.Image(blob=svg.tostring().encode(), format="svg") as image:
+        png_image = image.make_blob("png")
+    return png_image

@@ -22,6 +22,7 @@ setup(
         'slumber==0.7.1',
         'svgwrite==1.1.11',
         'gunicorn==19.7.1',
+        'Wand==0.4.4',
     ],
     python_requires='>=3.6',
     classifiers=[
