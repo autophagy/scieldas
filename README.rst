@@ -2,6 +2,10 @@
 Scieldas
 ========
 
+.. image:: http://scieldas.autophagy.io/rtd/scieldas.png
+    :target: http://scieldas.readthedocs.io/en/latest
+    :alt: Documentation Status
+
 .. image:: http://scieldas.autophagy.io/dockerhub/build/autophagy/scieldas.png
    :target: https://hub.docker.com/r/autophagy/scieldas/
    :alt: Docker Build Status
@@ -11,10 +15,15 @@ Scieldas
    :alt: MIT License
 
 
-Badges for software projects. Aiming to initially support Travis, RTD, PyPi
-(version and pyversions) and licenses (Apache, GPL, MIT).
+Scieldas is a service to provide metadata badges for open source project READMEs,
+inspired by `Shields.io`_. It currently supports:
 
-Built with Flask and Docker, probably. `Specification`_.
+- **Read The Docs** :: Build status of the Latest tag.
+- **Travis CI** :: Build status of the last build.
+- **PyPI** :: Version of project and supported python versions.
+- **Docker Hub** :: Status of the latest build.
+
+Built with Flask and Docker.
 
 Running Scieldas
 ================
@@ -30,70 +39,96 @@ Or pull the image from `Docker Hub`_ ::
     $ docker pull autophagy/scieldas
     $ docker run -d --name=scieldas -p 80:8080 --env TRAVIS_API_KEY=key autophagy/scieldas
 
-When running the container, replace the ``key`` in the Travis API env variable
-with your own key. To generate a key, see the `Travis API documentation`_.
+For more detailed information, including reqiured API keys, please see the
+`documentation`_.
 
-Button Examples
-===============
+Supported Badges
+================
 
-Read The Docs
--------------
+Travis CI
+~~~~~~~~~
 
-.. image:: spec/examples/rtd/Docs-Passing.png
-    :target: _
-    :alt: Read The Docs Build Passing
-
-.. image:: spec/examples/rtd/Docs-Failing.png
-    :target: _
-    :alt: Read The Docs Build Failing
-
-.. image:: spec/examples/rtd/Docs-Unknown.png
-    :target: _
-    :alt: Read The Docs Build Unknown
-
-
-Travis
-------
-
-.. image:: spec/examples/travis/Build-Passing.png
+.. image:: doc/_static/travis/Build-Passing.png
     :target: _
     :alt: Travis Build Passing
 
-.. image:: spec/examples/travis/Build-Failing.png
+.. image:: doc/_static/travis/Build-Failing.png
     :target: _
     :alt: Travis Build Failing
 
-.. image:: spec/examples/travis/Build-Unknown.png
+.. image:: doc/_static/travis/Build-Unknown.png
     :target: _
     :alt: Travis Build Unknown
 
-PyPi
-----
+Read The Docs
+~~~~~~~~~~~~~
 
-.. image:: spec/examples/pypi/Pypi-Version.png
+.. image:: doc/_static/rtd/Docs-Passing.png
+    :target: _
+    :alt: Read The Docs Build Passing
+
+.. image:: doc/_static/rtd/Docs-Failing.png
+    :target: _
+    :alt: Read The Docs Build Failing
+
+.. image:: doc/_static/rtd/Docs-Unknown.png
+    :target: _
+    :alt: Read The Docs Build Unknown
+
+PyPI
+~~~~
+
+Version
+.......
+
+.. image:: doc/_static/pypi/Pypi-Version.png
     :target: _
     :alt: PyPi Version
 
-.. image:: spec/examples/pypi/Python-Versions.png
+Python Versions
+...............
+
+.. image:: doc/_static/pypi/Python-Versions.png
     :target: _
     :alt: Python Versions
 
-Licenses
---------
 
-.. image:: spec/examples/licenses/Apache.png
+Docker Hub
+~~~~~~~~~~
+
+.. image:: doc/_static/dockerhub/Build-Passing.png
+    :target: _
+    :alt: Docker Build Passing
+
+.. image:: doc/_static/dockerhub/Build-Failing.png
+    :target: _
+    :alt: Docker Build Failing
+
+.. image:: doc/_static/dockerhub/Build-Building.png
+    :target: _
+    :alt: Docker Build Building
+
+.. image:: doc/_static/dockerhub/Build-Unknown.png
+    :target: _
+    :alt: Docker Build Unknown
+
+Licenses
+~~~~~~~~
+
+.. image:: doc/_static/licenses/Apache.png
     :target: _
     :alt: Apache 2.0 license
 
-.. image:: spec/examples/licenses/GPL.png
+.. image:: doc/_static/licenses/GPL.png
     :target: _
     :alt: GPL license
 
-.. image:: spec/examples/licenses/MIT.png
+.. image:: doc/_static/licenses/MIT.png
     :target: _
     :alt: MIT license
 
-.. _Specification: spec/spec.rst
+
+.. _Shields.io: https://shields.io
 .. _Docker: https://www.docker.com
 .. _Docker Hub: https://hub.docker.com/r/autophagy/scieldas/
-.. _Travis API documentation: https://docs.travis-ci.com/api#authentication
+.. _documentation: https://scieldas.readthedocs.io/en/latest/
