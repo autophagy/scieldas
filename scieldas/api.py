@@ -13,7 +13,7 @@ API_BASE_URL = {
 BUTTON_BASE_TEXT = {
     'rtd': 'Docs :: {}',
     'travis': 'Build :: {}',
-    'pypi version': 'PyPi :: {}',
+    'pypi version': 'PyPI :: {}',
     'pypi pyversions': 'Python :: {}',
     'dockerhub': 'Docker :: {}',
 }

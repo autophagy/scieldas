@@ -64,7 +64,7 @@ Endpoint: ``/pypi/version/<project>.svg``
 
 .. image:: ../_static/pypi/Pypi-Version.png
     :target: _
-    :alt: PyPi Version
+    :alt: PyPI Version
 
 Python Versions
 ...............

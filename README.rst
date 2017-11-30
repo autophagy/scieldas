@@ -83,7 +83,7 @@ Version
 
 .. image:: doc/_static/pypi/Pypi-Version.png
     :target: _
-    :alt: PyPi Version
+    :alt: PyPI Version
 
 Python Versions
 ...............
