@@ -48,30 +48,30 @@ Supported Badges
 Travis CI
 ~~~~~~~~~
 
-.. image:: doc/_static/travis/Build-Passing.png
+.. image:: seonu/_static/travis/Build-Passing.png
     :target: _
     :alt: Travis Build Passing
 
-.. image:: doc/_static/travis/Build-Failing.png
+.. image:: seonu/_static/travis/Build-Failing.png
     :target: _
     :alt: Travis Build Failing
 
-.. image:: doc/_static/travis/Build-Unknown.png
+.. image:: seonu/_static/travis/Build-Unknown.png
     :target: _
     :alt: Travis Build Unknown
 
 Read The Docs
 ~~~~~~~~~~~~~
 
-.. image:: doc/_static/rtd/Docs-Passing.png
+.. image:: seonu/_static/rtd/Docs-Passing.png
     :target: _
     :alt: Read The Docs Build Passing
 
-.. image:: doc/_static/rtd/Docs-Failing.png
+.. image:: seonu/_static/rtd/Docs-Failing.png
     :target: _
     :alt: Read The Docs Build Failing
 
-.. image:: doc/_static/rtd/Docs-Unknown.png
+.. image:: seonu/_static/rtd/Docs-Unknown.png
     :target: _
     :alt: Read The Docs Build Unknown
 
@@ -81,14 +81,14 @@ PyPI
 Version
 .......
 
-.. image:: doc/_static/pypi/Pypi-Version.png
+.. image:: seonu/_static/pypi/Pypi-Version.png
     :target: _
     :alt: PyPI Version
 
 Python Versions
 ...............
 
-.. image:: doc/_static/pypi/Python-Versions.png
+.. image:: seonu/_static/pypi/Python-Versions.png
     :target: _
     :alt: Python Versions
 
@@ -96,34 +96,34 @@ Python Versions
 Docker Hub
 ~~~~~~~~~~
 
-.. image:: doc/_static/dockerhub/Build-Passing.png
+.. image:: seonu/_static/dockerhub/Build-Passing.png
     :target: _
     :alt: Docker Build Passing
 
-.. image:: doc/_static/dockerhub/Build-Failing.png
+.. image:: seonu/_static/dockerhub/Build-Failing.png
     :target: _
     :alt: Docker Build Failing
 
-.. image:: doc/_static/dockerhub/Build-Building.png
+.. image:: seonu/_static/dockerhub/Build-Building.png
     :target: _
     :alt: Docker Build Building
 
-.. image:: doc/_static/dockerhub/Build-Unknown.png
+.. image:: seonu/_static/dockerhub/Build-Unknown.png
     :target: _
     :alt: Docker Build Unknown
 
 Licenses
 ~~~~~~~~
 
-.. image:: doc/_static/licenses/Apache.png
+.. image:: seonu/_static/licenses/Apache.png
     :target: _
     :alt: Apache 2.0 license
 
-.. image:: doc/_static/licenses/GPL.png
+.. image:: seonu/_static/licenses/GPL.png
     :target: _
     :alt: GPL license
 
-.. image:: doc/_static/licenses/MIT.png
+.. image:: seonu/_static/licenses/MIT.png
     :target: _
     :alt: MIT license
 
