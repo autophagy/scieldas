@@ -1,6 +1,14 @@
 import svgwrite
 import wand.image
 
+def create_image(filetype, text_func, *func_params):
+    if filetype == 'svg':
+        return create_svg(text_func, *func_params)
+    elif filetype == 'png':
+        return create_png(text_func, *func_params)
+    else:
+        raise ValueError("{0} file type is not supported.")
+
 def create_svg(text_func, *func_params):
 
     # Create the text
