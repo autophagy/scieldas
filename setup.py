@@ -18,7 +18,7 @@ setup(
     long_description=readme,
     packages=['scieldas'],
     install_requires=[
-        'Flask==0.12.2',
+        'Flask==0.12.3',
         'slumber==0.7.1',
         'svgwrite==1.1.11',
         'gunicorn==19.7.1',

@@ -14,7 +14,7 @@ ADD README.rst /app/README.rst
 ADD gunicorn_config.py /app/gunicorn_config.py
 ADD logging.conf /app/logging.conf
 
-EXPOSE 8080
+EXPOSE 80
 
 WORKDIR /app
 RUN pip install e .
