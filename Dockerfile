@@ -11,8 +11,12 @@ RUN mkdir -pv /app/scieldas
 ADD /scieldas /app/scieldas
 ADD setup.py /app/setup.py
 ADD README.rst /app/README.rst
+ADD gunicorn_config.py /app/gunicorn_config.py
+ADD logging.conf /app/logging.conf
+
+EXPOSE 8080
 
 WORKDIR /app
 RUN pip install e .
 ENTRYPOINT ["gunicorn"]
-CMD ["--bind", "0.0.0.0:80", "scieldas"]
+CMD ["--config", "/app/gunicorn_config.py", "--log-config", "/app/logging.conf", "scieldas"]
