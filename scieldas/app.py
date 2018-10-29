@@ -63,5 +63,10 @@ def docker_build(user, project, filetype):
 def licenses(license, filetype):
     return image_creator.create_image(filetype, api.get_license, license), filetype
 
+@application.route("/_/health", methods=['GET'])
+def health_check():
+    return 'OK'
+
+
 if __name__ == "__main__":
     application.run(host='0.0.0.0')
