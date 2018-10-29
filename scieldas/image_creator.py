@@ -1,24 +1,24 @@
 import svgwrite
-import wand.image
+import cairosvg
 
 def create_image(filetype, text_func, *func_params):
-    if filetype == 'svg':
-        return create_svg(text_func, *func_params)
-    elif filetype == 'png':
-        return create_png(text_func, *func_params)
-    else:
+    if filetype not in ('svg', 'png'):
         raise ValueError("{0} file type is not supported.")
 
-def create_svg(text_func, *func_params):
-
-    # Create the text
-
     text = text_func(*func_params)
-
+    height = 41
     # Width is our twice our padding (2*16) plus 7 pixels per character
-    svg = svgwrite.Drawing(size = ("{}px".format((len(text)*7)+32), "41px"))
+    width = (len(text)*7)+32
+    if filetype == 'svg':
+        return create_svg(text, height, width)
+    if filetype == 'png':
+        return create_png(text, height, width)
+
+def create_svg(text, height, width):
+
+    svg = svgwrite.Drawing(size = (f"{width}px", f"{height}px"))
     text_style = ("font-size: 14px; "
-                  "font-family: Inconsolata, monospace;"
+                  "font-family: Inconsolata;"
                   "text-align: center")
     scield_rect = svg.rect(size=('100%', '100%'), fill='#2D2D2D')
     scield_text = svg.text(text, insert=(16, 24), fill="#F2F2F2", style=text_style)
@@ -29,10 +29,8 @@ def create_svg(text_func, *func_params):
     svg.add(scield_text)
     return svg
 
-def create_png(text_func, *func_params):
+def create_png(text, height, width):
 
-    svg = create_svg(text_func, *func_params)
-
-    with wand.image.Image(blob=svg.tostring().encode(), format="svg") as image:
-        png_image = image.make_blob("png")
-    return png_image
+    svg = create_svg(text, height, width)
+    png = cairosvg.svg2png(bytestring=svg.tostring().encode(), parent_width=width, parent_height=height)
+    return png
