@@ -116,4 +116,24 @@ Valid licenses are **Apache**, **GPL**, and **MIT**.
     :target: _
     :alt: MIT license
 
+Code Styles
+~~~~~~~~~~~
+
+Endpoint: ``/styles/<style>.svg``
+
+Valid styles are **black**, **yapf** and **autopep8**.
+
+.. image:: ../_static/styles/black.png
+    :target: _
+    :alt: Black
+
+.. image:: ../_static/styles/yapf.png
+    :target: _
+    :alt: Yapf
+
+.. image:: ../_static/styles/autopep8.png
+    :target: _
+    :alt: AutoPEP8
+
+
 .. _Inconsolata: https://fonts.google.com/specimen/Inconsolata

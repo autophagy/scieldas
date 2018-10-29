@@ -8,6 +8,8 @@ inspired by `Shields.io`_. It is built with flask and currently supports:
 - **Travis CI** :: Build status of the last build.
 - **PyPI** :: Version of project and supported python versions.
 - **Docker Hub** :: Status of the latest build.
+- **Licenses** :: The license of the project.
+- **Code Styles** :: The autoformatted style of the code.
 
 
 Contents

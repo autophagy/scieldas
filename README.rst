@@ -2,15 +2,19 @@
 Scieldas
 ========
 
-.. image:: http://scieldas.autophagy.io/rtd/scieldas.png
-    :target: http://scieldas.readthedocs.io/en/latest
+.. image:: https://scieldas.autophagy.io/rtd/scieldas.png
+    :target: https://scieldas.readthedocs.io/en/latest
     :alt: Documentation Status
 
-.. image:: http://scieldas.autophagy.io/dockerhub/build/autophagy/scieldas.png
+.. image:: https://scieldas.autophagy.io/dockerhub/build/autophagy/scieldas.png
    :target: https://hub.docker.com/r/autophagy/scieldas/
    :alt: Docker Build Status
 
-.. image:: http://scieldas.autophagy.io/licenses/MIT.png
+.. image:: https://scieldas.autophagy.io/styles/black.png
+   :target: https://black.readthedocs.io/en/stable/
+   :alt: Black
+
+.. image:: https://scieldas.autophagy.io/licenses/MIT.png
    :target: LICENSE
    :alt: MIT License
 
@@ -22,6 +26,8 @@ inspired by `Shields.io`_. It currently supports:
 - **Travis CI** :: Build status of the last build.
 - **PyPI** :: Version of project and supported python versions.
 - **Docker Hub** :: Status of the latest build.
+- **Licenses** :: The license of the project.
+- **Styles** :: The autoformatted code style of the project.
 
 Built with Flask and Docker.
 
@@ -126,6 +132,21 @@ Licenses
 .. image:: seonu/_static/licenses/MIT.png
     :target: _
     :alt: MIT license
+
+Code Styles
+~~~~~~~~~~~
+
+.. image:: seonu/_static/styles/black.png
+    :target: _
+    :alt: Black
+
+.. image:: seonu/_static/styles/yapf.png
+    :target: _
+    :alt: Yapf
+
+.. image:: seonu/_static/styles/autopep8.png
+    :target: _
+    :alt: AutoPEP8
 
 
 .. _Shields.io: https://shields.io
