@@ -4,7 +4,7 @@
     <p>{{ descriptor.description }}</p>
     {% endif %}
 
-    <div class="path"><span class="label">Path:</span><code>{{request.host}}{{descriptor.path}}</code></div>
+    <div class="path"><span class="label">Path:</span><code>{{request.host_url}}{{descriptor.path}}</code></div>
 
     {% for key, shield in buttons.items() %}
     <div class="scieldas">

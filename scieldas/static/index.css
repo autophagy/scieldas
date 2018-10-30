@@ -74,13 +74,14 @@ code {
     padding: 2px;
 }
 #container {
-    width: 760px;
+    width: 830px;
     margin-left: auto;
     margin-right: auto;
     margin-top: 2em;
 }
 .section {
     margin-bottom: 2em;
+    padding: 0em 2em;
 }
 .path {
     margin-bottom: 2em;

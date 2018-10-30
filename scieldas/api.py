@@ -27,29 +27,29 @@ buttons = {
 }
 
 descriptors = {
-    "rtd": Descriptor("ReadTheDocs Build Status", "/rtd/<project>.svg", buttons["rtd"]),
+    "rtd": Descriptor("ReadTheDocs Build Status", "rtd/<project>.svg", buttons["rtd"]),
     "travis": Descriptor(
-        "Travis CI Build Status", "/travis/<user>/<project>.svg", buttons["travis"]
+        "Travis CI Build Status", "travis/<user>/<project>.svg", buttons["travis"]
     ),
     "dockerhub": Descriptor(
         "Docker Hub Build Status",
-        "/dockerhub/build/<user>/<project>.svg",
+        "dockerhub/build/<user>/<project>.svg",
         buttons["dockerhub"],
     ),
     "pypi_version": Descriptor(
         "PyPI Version",
-        "/pypi/version/<project>.svg",
+        "pypi/version/<project>.svg",
         buttons["pypi_version"],
         example="0.2.0",
     ),
     "pypi_pyversions": Descriptor(
         "PyPI Python Versions",
-        "/pypi/pyversions/<project>.svg",
+        "pypi/pyversions/<project>.svg",
         buttons["pypi_pyversions"],
         example="3.6",
     ),
-    "licenses": Descriptor("Licenses", "/licenses/<license>.svg", buttons["licenses"]),
-    "styles": Descriptor("Code Styles", "/styles/<style>.svg", buttons["styles"]),
+    "licenses": Descriptor("Licenses", "licenses/<license>.svg", buttons["licenses"]),
+    "styles": Descriptor("Code Styles", "styles/<style>.svg", buttons["styles"]),
 }
 
 
