@@ -80,8 +80,13 @@ code {
     margin-top: 2em;
 }
 .section {
-    margin-bottom: 2em;
-    padding: 0em 2em;
+    padding: 1em;
+    margin-left: 1em;
+    margin-right: 1em;
+    border: 1px solid transparent;
+}
+.section:target {
+    border: 1px solid #2D2D2D;
 }
 .path {
     margin-bottom: 2em;
