@@ -9,9 +9,9 @@ class StateButton(object):
 
     def create(self, state=""):
         if self.prefix:
-            return f"{self.prefix} :: {self.states.get(state, self.default)}"
+            return f"{self.prefix} :: {self.states.get(state.lower(), self.default)}"
         else:
-            return self.states.get(state, self.default)
+            return self.states.get(state.lower(), self.default)
 
 
 class TextButton(object):
