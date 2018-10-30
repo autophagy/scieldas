@@ -1,4 +1,4 @@
-from flask import Flask, make_response, redirect, abort
+from flask import Flask, make_response, abort, render_template
 from functools import wraps
 
 application = Flask(__name__)
@@ -28,7 +28,7 @@ def create_image_response(func):
 
 @application.route("/")
 def index():
-    return redirect("https://github.com/autophagy/scieldas", code=302)
+    return render_template("index.html", descriptors=api.descriptors)
 
 
 # Read The Docs

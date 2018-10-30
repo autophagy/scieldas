@@ -1,0 +1,17 @@
+<div id="{{key}}", class="{{ descriptor.name }} section">
+    <h2>{{ descriptor.name }}</h2>
+    {% if descriptor.description %}
+    <p>{{ descriptor.description }}</p>
+    {% endif %}
+
+    <div class="path"><span class="label">Path:</span><code>{{request.host}}{{descriptor.path}}</code></div>
+
+    {% for key, shield in buttons.items() %}
+    <div class="scieldas">
+        <div class="state"><code>{{key}}</code></div>
+        <div class="scield">
+        {{shield.tostring() | safe}}
+        </div>
+    </div>
+    {% endfor %}
+</div>

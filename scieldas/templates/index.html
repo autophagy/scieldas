@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#2D2D2D" />
+
+    <title>Scieldas</title>
+
+    <link rel="stylesheet" href="{{url_for('static', filename='index.css')}}" />
+    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
+</head>
+
+<body>
+
+    <div id="container">
+
+        <div class="section">
+            <img src="{{url_for('static', filename='icon.svg')}}" id="logo" />
+        </div>
+
+        <div class="section">
+            <p>Scieldas is a service to provide metadata badges for open source project
+            READMEs, inspired by <a href="https://shields.io/">Shields.io</a>. All badges
+            are available as .svg or .png images.</p>
+        </div>
+
+        <div class="section">
+            Available scieldas:
+            <ul>
+            {% for key, descriptor in descriptors.items() %}
+                <li><a href="#{{key}}">{{descriptor.name}}</a></li>
+            {% endfor %}
+            </ul>
+            </div>
+
+        {% for key, descriptor in descriptors.items() %}
+            {{descriptor.render(key) | safe}}
+        {% endfor %}
+    </div>
+</body>
+</html>
