@@ -6,7 +6,7 @@ from .button import StateButton, TextButton
 from .descriptor import Descriptor
 
 API_BASE_URL = {
-    "rtd": "https://readthedocs.org/api/v1/",
+    "rtd": "https://readthedocs.org/api/v2/",
     "travis": "https://api.travis-ci.org/",
     "pypi": "https://pypi.python.org/pypi/",
     "dockerhub": "https://hub.docker.com/v2/",
@@ -76,11 +76,11 @@ def _format_pyversions(classifiers):
 def get_rtd_build_status(project):
     try:
         api = _create_api("rtd")
-        rtd_status = api.version(project).get(slug="latest")
+        version = api.version.get(project__slug=project, active=True)
         button = buttons["rtd"]
 
-        if len(rtd_status["objects"]) > 0:
-            if rtd_status["objects"][0]["built"]:
+        if len(version["results"]) > 0:
+            if version["results"][0]["built"]:
                 return button.create("pass")
             else:
                 return button.create("fail")
