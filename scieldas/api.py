@@ -74,10 +74,10 @@ def _format_pyversions(classifiers):
 
 
 def get_rtd_build_status(project):
+    button = buttons["rtd"]
     try:
         api = _create_api("rtd")
         version = api.version.get(project__slug=project, active=True)
-        button = buttons["rtd"]
 
         if len(version["results"]) > 0:
             if version["results"][0]["built"]:
@@ -91,6 +91,7 @@ def get_rtd_build_status(project):
 
 
 def get_travis_build_status(user, project):
+    button = buttons["travis"]
     try:
         api = _create_api("travis")
         user_api = getattr(api.repos, user)
@@ -98,7 +99,6 @@ def get_travis_build_status(user, project):
         travis_project = user_api(project).get(
             headers={"Authorization": "token {}".format(token)}
         )
-        button = buttons["travis"]
 
         if travis_project["last_build_status"] == 0:
             return button.create("pass")
@@ -111,11 +111,11 @@ def get_travis_build_status(user, project):
 
 
 def get_pypi_version(project):
+    button = buttons["pypi_version"]
     try:
         api = _create_api("pypi")
         pypi_project = getattr(api, project)
         pypi_json = pypi_project("json").get()
-        button = buttons["pypi_version"]
 
         return button.create(pypi_json["info"]["version"])
     except slumber.exceptions.HttpNotFoundError:
@@ -123,11 +123,11 @@ def get_pypi_version(project):
 
 
 def get_pypi_pyversions(project):
+    button = buttons["pypi_pyversions"]
     try:
         api = _create_api("pypi")
         pypi_project = getattr(api, project)
         pypi_json = pypi_project("json").get()
-        button = buttons["pypi_pyversions"]
 
         classifiers = pypi_json["info"]["classifiers"]
         return button.create(_format_pyversions(classifiers))
@@ -136,11 +136,11 @@ def get_pypi_pyversions(project):
 
 
 def get_docker_build_status(user, project):
+    button = buttons["dockerhub"]
     try:
         api = _create_api("dockerhub")
         user_api = getattr(api.repositories, user)
         latest_builds = user_api(project).buildhistory.get()
-        button = buttons["dockerhub"]
 
         latest_build_result = latest_builds["results"][0]["status"]
         if latest_build_result == 10:
