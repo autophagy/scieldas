@@ -27,10 +27,7 @@
             <p>Scieldas is a service to provide metadata badges for open source project
             READMEs, inspired by <a href="https://shields.io/">Shields.io</a>. All badges
             are available as .svg or .png images.</p>
-        </div>
 
-        <div class="section">
-            Available scieldas:
             <ul>
             {% for key, descriptor in descriptors.items() %}
                 <li><a href="#{{key}}">{{descriptor.name}}</a></li>
