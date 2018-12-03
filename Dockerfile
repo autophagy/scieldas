@@ -11,14 +11,14 @@ RUN wget -O /usr/share/fonts/truetype/Inconsolata.ttf https://raw.github.com/goo
 RUN mkdir -pv /app/scieldas
 ADD /scieldas /app/scieldas
 ADD setup.py /app/setup.py
-ADD README.rst /app/README.rst
-ADD gunicorn_config.py /app/gunicorn_config.py
-ADD logging.conf /app/logging.conf
 
 EXPOSE 80
 
 WORKDIR /app
 RUN pip install e .
 HEALTHCHECK CMD curl --fail http://localhost:80/_/health || exit 1
+ADD README.rst /app/README.rst
+ADD gunicorn_config.py /app/gunicorn_config.py
+ADD logging.conf /app/logging.conf
 ENTRYPOINT ["gunicorn"]
 CMD ["--config", "/app/gunicorn_config.py", "--log-config", "/app/logging.conf", "scieldas"]

@@ -1,2 +1,4 @@
-bind = "0.0.0.0:80"
-workers = 2
+import os
+
+bind = "0.0.0.0:{}".format(os.getenv("PORT", "80"))
+workers = 5
