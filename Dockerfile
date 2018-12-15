@@ -17,7 +17,7 @@ EXPOSE 80
 WORKDIR /app
 RUN pip install e .
 HEALTHCHECK CMD curl --fail http://localhost:80/_/health || exit 1
-ADD README.rst /app/README.md
+ADD README.md /app/README.md
 ADD gunicorn_config.py /app/gunicorn_config.py
 ADD logging.conf /app/logging.conf
 ENTRYPOINT ["gunicorn"]
