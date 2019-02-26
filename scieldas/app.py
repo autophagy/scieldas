@@ -69,6 +69,16 @@ def pyversions(project, filetype):
     )
 
 
+# PePy Download Statistics
+@application.route("/pepy/<project>.<filetype>")
+@create_image_response
+def pepy(project, filetype):
+    return (
+        image_creator.create_image(filetype, api.get_pepy_downloads, project),
+        filetype,
+    )
+
+
 # Dockerhub
 
 

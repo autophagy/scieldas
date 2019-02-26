@@ -1,6 +1,8 @@
 import slumber
 import os
 import re
+from xml.dom import minidom
+from xml.parsers.expat import ExpatError
 
 from .button import StateButton, TextButton
 from .descriptor import Descriptor
@@ -10,6 +12,7 @@ API_BASE_URL = {
     "travis": "https://api.travis-ci.org/",
     "pypi": "https://pypi.python.org/pypi/",
     "dockerhub": "https://hub.docker.com/v2/",
+    "pepy": "https://pepy.tech/badge/",
 }
 
 buttons = {
@@ -20,6 +23,7 @@ buttons = {
     ),
     "pypi_version": TextButton(prefix="PyPI"),
     "pypi_pyversions": TextButton(prefix="Python"),
+    "pepy_downloads": TextButton(prefix="Downloads"),
     "licenses": StateButton({"mit": "MIT", "apache": "Apache 2", "gpl": "GPL 3"}),
     "styles": StateButton(
         {"black": "Black", "yapf": "Yapf", "autopep8": "AutoPEP8"}, prefix="Style"
@@ -47,6 +51,12 @@ descriptors = {
         "pypi/pyversions/<project>.svg",
         buttons["pypi_pyversions"],
         example="3.6",
+    ),
+    "pepy_downloads": Descriptor(
+        "PePy Total Downloads",
+        "pepy/<project>.svg",
+        buttons["pepy_downloads"],
+        example="150k",
     ),
     "licenses": Descriptor("Licenses", "licenses/<license>.svg", buttons["licenses"]),
     "styles": Descriptor("Code Styles", "styles/<style>.svg", buttons["styles"]),
@@ -132,6 +142,18 @@ def get_pypi_pyversions(project):
         classifiers = pypi_json["info"]["classifiers"]
         return button.create(_format_pyversions(classifiers))
     except slumber.exceptions.HttpNotFoundError:
+        return button.create()
+
+
+def get_pepy_downloads(project):
+    button = buttons["pepy_downloads"]
+    try:
+        api = _create_api("pepy")
+        pepy_project = getattr(api, project)
+        pepy_svg = pepy_project.get()
+        doc = minidom.parseString(pepy_svg)
+        return button.create(doc.getElementsByTagName("text")[-1].firstChild.nodeValue)
+    except (slumber.exceptions.HttpNotFoundError, ExpatError):
         return button.create()
 
 

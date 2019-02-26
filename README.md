@@ -46,6 +46,7 @@ the [documentation](https://scieldas.readthedocs.io/en/latest/).
 ![Read The Docs Build Passing](seonu/_static/rtd/Docs-Passing.png)
 ![Read The Docs Build Failing](seonu/_static/rtd/Docs-Failing.png)
 ![Read The Docs Build Unknown](seonu/_static/rtd/Docs-Unknown.png)
+
 ### PyPI
 
 #### Version
@@ -55,6 +56,10 @@ the [documentation](https://scieldas.readthedocs.io/en/latest/).
 #### Python Versions
 
 ![Python Versions](seonu/_static/pypi/Python-Versions.png)
+
+### PePy Downloads
+
+![PePy Downloads](seonu/_static/pepy/PePy-Downloads.png)
 
 ### Docker Hub
 

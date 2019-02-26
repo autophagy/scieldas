@@ -75,6 +75,14 @@ Endpoint: ``/pypi/pyversions/<project>.svg``
     :target: _
     :alt: Python Versions
 
+PePy Downloads
+~~~~~~~~~~~~~~
+
+Endpoint: ``/pepy/<project>.svg``
+
+.. image:: ../_static/pepy/PePy-Downloads.png
+    :target: _
+    :alt: PePy Downloads
 
 Docker Hub
 ~~~~~~~~~~
