@@ -10,6 +10,7 @@ from .descriptor import Descriptor
 API_BASE_URL = {
     "rtd": "https://readthedocs.org/api/v2/",
     "travis": "https://api.travis-ci.org/",
+    "coveralls": "https://coveralls.io/",
     "pypi": "https://pypi.python.org/pypi/",
     "dockerhub": "https://hub.docker.com/v2/",
     "pepy": "https://pepy.tech/badge/",
@@ -18,6 +19,7 @@ API_BASE_URL = {
 buttons = {
     "rtd": StateButton({"pass": "Passing", "fail": "Failing"}, prefix="Docs"),
     "travis": StateButton({"pass": "Passing", "fail": "Failing"}, prefix="Build"),
+    "coveralls": TextButton(prefix="Coverage"),
     "dockerhub": StateButton(
         {"pass": "Passing", "fail": "Failing", "building": "Building"}, prefix="Docker"
     ),
@@ -34,6 +36,12 @@ descriptors = {
     "rtd": Descriptor("ReadTheDocs Build Status", "rtd/<project>.svg", buttons["rtd"]),
     "travis": Descriptor(
         "Travis CI Build Status", "travis/<user>/<project>.svg", buttons["travis"]
+    ),
+    "coveralls": Descriptor(
+        "Coveralls Test Coverage",
+        "coveralls/<source>/<user>/<project>.svg",
+        buttons["coveralls"],
+        example="86%",
     ),
     "dockerhub": Descriptor(
         "Docker Hub Build Status",
@@ -116,6 +124,17 @@ def get_travis_build_status(user, project):
             return button.create("fail")
         else:
             return button.create()
+    except slumber.exceptions.HttpNotFoundError:
+        return button.create()
+
+
+def get_coveralls_coverage(source, user, project):
+    button = buttons["coveralls"]
+    try:
+        api = _create_api("coveralls")
+        source_api = getattr(api, source)
+        coveralls_json = source_api(user)(project).get(branch="master")
+        return button.create(f"{round(coveralls_json['covered_percent'])}%")
     except slumber.exceptions.HttpNotFoundError:
         return button.create()
 

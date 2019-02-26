@@ -47,6 +47,10 @@ the [documentation](https://scieldas.readthedocs.io/en/latest/).
 ![Read The Docs Build Failing](seonu/_static/rtd/Docs-Failing.png)
 ![Read The Docs Build Unknown](seonu/_static/rtd/Docs-Unknown.png)
 
+### Coveralls
+
+![Coveralls Coverage](seonu/_static/coveralls/Coveralls.png)
+
 ### PyPI
 
 #### Version

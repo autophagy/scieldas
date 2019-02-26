@@ -53,6 +53,18 @@ def travis(user, project, filetype):
     )
 
 
+# Coveralls
+@application.route("/coveralls/<source>/<user>/<project>.<filetype>")
+@create_image_response
+def coveralls(source, user, project, filetype):
+    return (
+        image_creator.create_image(
+            filetype, api.get_coveralls_coverage, source, user, project
+        ),
+        filetype,
+    )
+
+
 # PyPi
 @application.route("/pypi/version/<project>.<filetype>")
 @create_image_response

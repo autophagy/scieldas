@@ -54,6 +54,15 @@ Endpoint: ``/rtd/<project>.svg``
     :target: _
     :alt: Read The Docs Build Unknown
 
+Coveralls
+~~~~~~~~~
+
+Endpoint: ``/coveralls/<source>/<user>/<project>.svg``
+
+.. image:: ../_static/coveralls/Coveralls.png
+    :target: _
+    :alt: Coveralls test coverage
+
 PyPI
 ~~~~
 
