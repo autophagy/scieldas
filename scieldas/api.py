@@ -33,41 +33,45 @@ buttons = {
 }
 
 descriptors = {
-    "rtd": Descriptor("ReadTheDocs Build Status", "rtd/<project>.svg", buttons["rtd"]),
+    "rtd": Descriptor("ReadTheDocs Build Status", "rtd/:project.svg", buttons["rtd"]),
     "travis": Descriptor(
-        "Travis CI Build Status", "travis/<user>/<project>.svg", buttons["travis"]
+        "Travis CI Build Status", "travis/:user/:project.svg", buttons["travis"]
     ),
     "coveralls": Descriptor(
         "Coveralls Test Coverage",
-        "coveralls/<source>/<user>/<project>.svg",
+        "coveralls/:vcs/:user/:project.svg",
         buttons["coveralls"],
         example="86%",
     ),
     "dockerhub": Descriptor(
         "Docker Hub Build Status",
-        "dockerhub/build/<user>/<project>.svg",
+        "dockerhub/build/:user/:project.svg",
         buttons["dockerhub"],
     ),
     "pypi_version": Descriptor(
         "PyPI Version",
-        "pypi/version/<project>.svg",
+        "pypi/version/:project.svg",
         buttons["pypi_version"],
         example="0.2.0",
     ),
     "pypi_pyversions": Descriptor(
         "PyPI Python Versions",
-        "pypi/pyversions/<project>.svg",
+        "pypi/pyversions/:project.svg",
         buttons["pypi_pyversions"],
         example="3.6",
     ),
     "pepy_downloads": Descriptor(
         "PePy Total Downloads",
-        "pepy/<project>.svg",
+        "pepy/:project.svg",
         buttons["pepy_downloads"],
         example="150k",
     ),
-    "licenses": Descriptor("Licenses", "licenses/<license>.svg", buttons["licenses"]),
-    "styles": Descriptor("Code Styles", "styles/<style>.svg", buttons["styles"]),
+    "licenses": Descriptor(
+        "Licenses", "licenses/:license(mit|apache|gpl).svg", buttons["licenses"]
+    ),
+    "styles": Descriptor(
+        "Code Styles", "styles/:style(black|yapf|autopep8).svg", buttons["styles"]
+    ),
 }
 
 
