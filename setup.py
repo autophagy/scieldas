@@ -1,4 +1,3 @@
-
 # -*- coding: utf-8 -*-
 
 from setuptools import setup
@@ -18,12 +17,21 @@ setup(
     long_description=readme,
     packages=["scieldas"],
     install_requires=[
+        "beautifulsoup4==4.7.1",
         "Flask==0.12.3",
-        "slumber==0.7.1",
+        "requests==2.21.0",
         "svgwrite==1.1.11",
-        "gunicorn==19.7.1",
+        "gunicorn==19.9.0",
         "CairoSVG==2.1.1",
+        "requests-cache==0.4.13",
+        "gevent==1.4.0",
+        "SQLAlchemy==1.3.1",
+        "Flask-SQLAlchemy==2.3.2",
+        "psycopg2==2.8.1",
     ],
+    extras_require={
+        "testing": ["black==18.9b0", "flake8==3.7.7", "mypy==0.670", "isort==4.3.15"]
+    },
     python_requires=">=3.6",
     classifiers=[
         "Development Status :: 4 - Beta",

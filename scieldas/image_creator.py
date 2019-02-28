@@ -1,23 +1,25 @@
-import svgwrite
+from functools import lru_cache
+from os import environ
+
 import cairosvg
+import svgwrite
 
 
-def create_image(filetype, text_func, *func_params):
+@lru_cache(maxsize=int(environ.get("IMAGE_CACHE_COUNT", 5000)))
+def create_image(text, filetype):
     if filetype not in ("svg", "png"):
         raise ValueError("{0} file type is not supported.")
 
-    text = text_func(*func_params)
     height = 41
     # Width is our twice our padding (2*16) plus 7 pixels per character
     width = (len(text) * 7) + 32
     if filetype == "svg":
-        return create_svg(text, height, width)
+        return _create_svg(text, height, width)
     if filetype == "png":
-        return create_png(text, height, width)
+        return _create_png(text, height, width)
 
 
-def create_svg(text, height, width):
-
+def _create_svg(text, height, width):
     svg = svgwrite.Drawing(size=(f"{width}px", f"{height}px"))
     scield_rect = svg.rect(size=("100%", "100%"), fill="#2D2D2D")
     scield_text = svg.text(text, insert=(160, 240), fill="#F2F2F2")
@@ -35,9 +37,8 @@ def create_svg(text, height, width):
     return svg
 
 
-def create_png(text, height, width):
-
-    svg = create_svg(text, height, width)
+def _create_png(text, height, width):
+    svg = _create_svg(text, height, width)
     png = cairosvg.svg2png(
         bytestring=svg.tostring().encode(), parent_width=width, parent_height=height
     )

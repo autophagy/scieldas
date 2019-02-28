@@ -102,3 +102,7 @@ ENV/
 
 # sphinx stuff
 doc/_build/
+
+.idea
+
+test.db

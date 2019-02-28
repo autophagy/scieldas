@@ -17,6 +17,12 @@
 
 <body>
 
+    {% if github_thank %}
+    <div id="github_thank">
+        Your Github OAuth token has been added to Scieldas. Thank you! <3
+    </div>
+    {% endif %}
+
     <div id="container">
 
         <div class="section">
@@ -33,15 +39,20 @@
             <p>The source code is available on <a href="https://github.com/autophagy/scieldas">GitHub</a>.</p>
 
             <ul>
-            {% for key, descriptor in descriptors.items() %}
-                <li><a href="#{{key}}">{{descriptor.name}}</a></li>
+            {% for key in services.keys()|sort() %}
+                <li><a href="#{{key.replace(' ', '-')}}">{{key}}</a></li>
             {% endfor %}
             </ul>
             </div>
 
-        {% for key, descriptor in descriptors.items() %}
-            {{descriptor.render(key) | safe}}
-        {% endfor %}
+            {% for key in services.keys()|sort() %}
+                <div id="{{key.replace(' ', '-')}}" class="section">
+                    <h1>{{key}}</h1>
+                    {% for route in services[key] %}
+                        {{route.get_descriptor().render() | safe}}
+                    {% endfor %}
+                </div>
+            {% endfor %}
     </div>
 </body>
 </html>

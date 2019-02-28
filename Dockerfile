@@ -1,30 +1,31 @@
-FROM python:3.6.4-alpine3.7
+FROM python:3.7-slim
 
+RUN apt-get update \
+ && mkdir -p /usr/share/man/man1 \
+ && mkdir -p /usr/share/man/man7 \
+ && apt-get -y install gcc libpq-dev python3-cairosvg wget curl python3-pil fontconfig make postgresql
 
-
-RUN apk add --no-cache \
-    build-base cairo-dev cairo cairo-tools wget curl \
-    # pillow dependencies
-    jpeg-dev zlib-dev freetype-dev lcms2-dev openjpeg-dev tiff-dev tk-dev tcl-dev
-
-RUN mkdir -pv /usr/share/fonts/truetype
-RUN wget -O /usr/share/fonts/truetype/Inconsolata.ttf https://raw.github.com/google/fonts/master/ofl/inconsolata/Inconsolata-Regular.ttf && fc-cache -fv
+RUN wget -O Inconsolata.ttf https://raw.github.com/google/fonts/master/ofl/inconsolata/Inconsolata-Regular.ttf \
+ && mv Inconsolata.ttf /usr/share/fonts/truetype \
+ && fc-cache -fv
 
 RUN mkdir -pv /app/scieldas
 ADD /scieldas /app/scieldas
 ADD setup.py /app/setup.py
+ADD Makefile /app/Makefile
 
 EXPOSE 80
+
+WORKDIR /app
+RUN pip install --upgrade pip setuptools && make install
+HEALTHCHECK CMD curl --fail http://localhost:80/_/health || exit 1
+ADD README.md /app/README.md
+ADD gunicorn_config.py /app/gunicorn_config.py
+ADD logging.conf /app/logging.conf
 
 ARG COMMIT=""
 LABEL commit=${COMMIT}
 ENV COMMIT_SHA=${COMMIT}
 
-WORKDIR /app
-RUN pip install e .
-HEALTHCHECK CMD curl --fail http://localhost:80/_/health || exit 1
-ADD README.md /app/README.md
-ADD gunicorn_config.py /app/gunicorn_config.py
-ADD logging.conf /app/logging.conf
-ENTRYPOINT ["gunicorn"]
-CMD ["--config", "/app/gunicorn_config.py", "--log-config", "/app/logging.conf", "scieldas"]
+ENTRYPOINT ["make"]
+CMD ["production"]

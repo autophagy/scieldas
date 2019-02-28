@@ -1,10 +1,14 @@
-<div id="{{key}}", class="{{ descriptor.name }} section">
+<div class="{{ descriptor.name.replace(' ', '-') }} descriptor">
     <h2>{{ descriptor.name }}</h2>
     {% if descriptor.description %}
     <p>{{ descriptor.description }}</p>
     {% endif %}
 
-    <div class="path"><span class="label">Path:</span><code>{{request.host_url}}{{descriptor.path}}</code></div>
+    <div class="paths">
+        {% for path in descriptor.paths %}
+        <div class="path"><span class="label">Path:</span><code>{{request.host_url}}{{path}}</code></div>
+        {% endfor %}
+    </div>
 
     {% for key, shield in buttons.items() %}
     <div class="scieldas">

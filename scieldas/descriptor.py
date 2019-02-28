@@ -1,30 +1,27 @@
-from .button import StateButton
-from . import image_creator
 from flask import render_template
+from scieldas import image_creator
+from scieldas.shields import StateShield
 
 
-class Descriptor(object):
-    def __init__(self, name, path, button, description=None, example=None):
+class Descriptor:
+    def __init__(self, name, paths, shield, example=None):
         self.name = name
-        self.path = path
-        self.button = button
-        self.description = description
+        self.paths = paths
+        self.shield = shield
         self.example = example
 
     def has_states(self):
-        return isinstance(self.button, StateButton)
+        return isinstance(self.shield, StateShield)
 
-    def render(self, key):
+    def render(self):
         buttons = {}
         if self.has_states():
-            for state in self.button.states:
+            for state in self.shield.states:
                 buttons[state] = image_creator.create_image(
-                    "svg", self.button.create, state
+                    self.shield.create(state), "svg"
                 )
         else:
             buttons["example"] = image_creator.create_image(
-                "svg", self.button.create, self.example
+                self.shield.create(self.example), "svg"
             )
-        return render_template(
-            "descriptor.html", descriptor=self, buttons=buttons, key=key
-        )
+        return render_template("descriptor.html", descriptor=self, buttons=buttons)
