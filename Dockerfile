@@ -1,7 +1,6 @@
 FROM python:3.6.4-alpine3.7
 
-ARG COMMIT=""
-LABEL commit=${COMMIT}
+
 
 RUN apk add --no-cache \
     build-base cairo-dev cairo cairo-tools wget curl \
@@ -17,6 +16,8 @@ ADD setup.py /app/setup.py
 
 EXPOSE 80
 
+ARG COMMIT=""
+LABEL commit=${COMMIT}
 ENV COMMIT_SHA=${COMMIT}
 
 WORKDIR /app
