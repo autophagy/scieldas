@@ -1,3 +1,4 @@
+from os import environ
 from flask import Flask, make_response, abort, render_template
 from functools import wraps
 
@@ -5,6 +6,8 @@ application = Flask(__name__)
 
 from . import api
 from . import image_creator
+
+COMMIT_SHA = environ.get("COMMIT_SHA", None)
 
 
 def create_image_response(func):
@@ -28,7 +31,9 @@ def create_image_response(func):
 
 @application.route("/")
 def index():
-    return render_template("index.html", descriptors=api.descriptors)
+    return render_template(
+        "index.html", descriptors=api.descriptors, commit_sha=COMMIT_SHA
+    )
 
 
 # Read The Docs

@@ -24,10 +24,13 @@
         </div>
 
         <div class="section">
-            <p>Scieldas is a service to provide metadata badges for open source project
-            READMEs, inspired by <a href="https://shields.io/">Shields.io</a>. All badges
-            are available as .svg or .png images.</p> The source code is available on
-            <a href="https://github.com/autophagy/scieldas">GitHub</a>.
+            <p>Scieldas
+            {% if commit_sha %}
+            (<a href="https://github.com/autophagy/scieldas/commit/{{commit_sha}}">{{commit_sha}}</a>)
+            {% endif %}
+            is a service to provide metadata shields for open source project READMEs, inspired by
+            <a href="https://shields.io/">Shields.io</a>. All shields are available as .svg or .png images.</p>
+            <p>The source code is available on <a href="https://github.com/autophagy/scieldas">GitHub</a>.</p>
 
             <ul>
             {% for key, descriptor in descriptors.items() %}

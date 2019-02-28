@@ -1,5 +1,8 @@
 FROM python:3.6.4-alpine3.7
 
+ARG COMMIT=""
+LABEL commit=${COMMIT}
+
 RUN apk add --no-cache \
     build-base cairo-dev cairo cairo-tools wget curl \
     # pillow dependencies
@@ -13,6 +16,8 @@ ADD /scieldas /app/scieldas
 ADD setup.py /app/setup.py
 
 EXPOSE 80
+
+ENV COMMIT_SHA=${COMMIT}
 
 WORKDIR /app
 RUN pip install e .
