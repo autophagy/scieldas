@@ -23,7 +23,7 @@ def create_svg(text, height, width):
     scield_text = svg.text(text, insert=(160, 240), fill="#F2F2F2")
     scield_text.update(
         {
-            "font_family": "Inconsolata, monospace",
+            "font_family": "Inconsolata, Courier, monospace",
             "font_size": "140",
             "transform": "scale(.1)",
             "textLength": f"{(width*10)-(160*2)}",
