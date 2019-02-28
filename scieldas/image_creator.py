@@ -19,13 +19,16 @@ def create_image(filetype, text_func, *func_params):
 def create_svg(text, height, width):
 
     svg = svgwrite.Drawing(size=(f"{width}px", f"{height}px"))
-    text_style = (
-        "font-size: 14px; "
-        "font-family: Inconsolata, 'Courier New', Courier, monospace;"
-        "text-align: center"
-    )
     scield_rect = svg.rect(size=("100%", "100%"), fill="#2D2D2D")
-    scield_text = svg.text(text, insert=(16, 24), fill="#F2F2F2", style=text_style)
+    scield_text = svg.text(text, insert=(160, 240), fill="#F2F2F2")
+    scield_text.update(
+        {
+            "font_family": "Inconsolata, monospace",
+            "font_size": "140",
+            "transform": "scale(.1)",
+            "textLength": f"{(width*10)-(160*2)}",
+        }
+    )
 
     svg.add(scield_rect)
     svg.add(scield_text)
