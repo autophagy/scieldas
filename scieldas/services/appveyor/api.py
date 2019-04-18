@@ -1,6 +1,7 @@
 from collections import namedtuple
 from typing import Optional
 
+from pydash import get
 from scieldas.api import API
 from scieldas.services import ServiceAPI
 
@@ -18,7 +19,7 @@ class Appveyor(ServiceAPI):
         if branch:
             api.add("branch", branch)
         details = api.get()
-        return details.get("build", {}).get("status")
+        return get(details, "build.status")
 
     @ServiceAPI.call
     def tests(
@@ -28,7 +29,7 @@ class Appveyor(ServiceAPI):
         api.add(user, repo)
         if branch:
             api.add("branch", branch)
-        jobs = api.get().get("build", {}).get("jobs")
+        jobs = get(api.get(), "build.jobs")
         for job in jobs:
             total += job.get("testsCount")
             passed += job.get("passedTestsCount")

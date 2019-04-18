@@ -1,5 +1,6 @@
 from typing import Optional
 
+from pydash import get
 from scieldas.api import API
 from scieldas.services import ServiceAPI
 
@@ -14,5 +15,4 @@ class Codecov(ServiceAPI):
         api.add(vcs, user, repo)
         if branch:
             api.add("branches", branch)
-        details = api.get()
-        return float(details.get("commit", {}).get("totals", {}).get("c"))
+        return float(get(api.get(), "commit.totals.c"))

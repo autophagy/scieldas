@@ -1,5 +1,6 @@
 from typing import Dict, Optional
 
+from pydash import get
 from scieldas.api import API
 from scieldas.services import ServiceAPI
 
@@ -35,7 +36,7 @@ class Github(ServiceAPI):
                 "Authorization": f"token {token}",
             }
         )
-        return repo_info.get("license", {}).get("name")
+        return get(repo_info, "license.name")
 
     @ServiceAPI.call
     def stars(self, owner: str, repo: str, token: str, api: API) -> Optional[int]:

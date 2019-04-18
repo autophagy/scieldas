@@ -1,5 +1,6 @@
 from typing import Optional
 
+from pydash import get
 from scieldas.api import API
 from scieldas.services import ServiceAPI
 
@@ -16,5 +17,4 @@ class Travis(ServiceAPI):
         travis_project = api.add("repos", user, project, "branches", branch).get(
             headers={"Authorization": "token {}".format(token)}
         )
-        state = travis_project.get("branch", {}).get("state")
-        return state_map.get(state)
+        return state_map.get(get(travis_project, "branch.state"))

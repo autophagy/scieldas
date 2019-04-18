@@ -1,6 +1,7 @@
 import re
 from typing import List, Optional
 
+from pydash import get
 from scieldas.api import API
 from scieldas.services import ServiceAPI
 
@@ -11,7 +12,7 @@ class PyPi(ServiceAPI):
     @ServiceAPI.call
     def version(self, project: str, api: API) -> Optional[str]:
         pypi_json = api.add(project, "json").get()
-        return pypi_json.get("info", {}).get("version")
+        return get(pypi_json, "info.version")
 
     @staticmethod
     def _format_pyversions(classifiers: List[str]) -> str:
@@ -103,7 +104,7 @@ class PyPi(ServiceAPI):
     @ServiceAPI.call
     def license(self, project: str, api: API) -> Optional[str]:
         pypi_json = api.add(project, "json").get()
-        return self._format_license(pypi_json.get("info", {}).get("classifiers"))
+        return self._format_license(get(pypi_json, "info.classifiers"))
 
 
 class PyPiStats(ServiceAPI):
@@ -113,4 +114,4 @@ class PyPiStats(ServiceAPI):
     def downloads(self, period: str, project: str, api: API) -> Optional[int]:
         periods = {"day": "last_day", "week": "last_week", "month": "last_month"}
         recent_stats = api.add("packages", project, "recent").get()
-        return recent_stats.get("data", {}).get(periods.get(period, period))
+        return get(recent_stats, f"data.{periods.get(period, period)}")

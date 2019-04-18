@@ -28,6 +28,7 @@ setup(
         "SQLAlchemy==1.3.1",
         "Flask-SQLAlchemy==2.3.2",
         "psycopg2==2.8.1",
+        "pydash==4.7.4",
     ],
     extras_require={
         "testing": ["black==18.9b0", "flake8==3.7.7", "mypy==0.670", "isort==4.3.15"]

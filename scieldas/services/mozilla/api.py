@@ -1,5 +1,6 @@
 from typing import Optional
 
+from pydash import get
 from scieldas.api import API
 from scieldas.services import ServiceAPI
 
@@ -20,9 +21,9 @@ class Mozilla(ServiceAPI):
     @ServiceAPI.call
     def version(self, addon: str, api: API) -> Optional[str]:
         addon_info = api.add("addons", "addon", addon).get()
-        return addon_info.get("current_version", {}).get("version")
+        return get(addon_info, "current_version.version")
 
     @ServiceAPI.call
     def rating(self, addon: str, api: API) -> float:
         addon_info = api.add("addons", "addon", addon).get()
-        return addon_info.get("ratings", {}).get("average")
+        return get(addon_info, "ratings.average")
