@@ -18,7 +18,7 @@ setup(
     packages=["scieldas"],
     install_requires=[
         "beautifulsoup4==4.7.1",
-        "Flask==0.12.3",
+        "Flask==1.0",
         "requests==2.21.0",
         "svgwrite==1.1.11",
         "gunicorn==19.9.0",
