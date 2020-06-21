@@ -31,7 +31,7 @@ setup(
         "pydash==4.7.4",
     ],
     extras_require={
-        "testing": ["black==18.9b0", "flake8==3.7.7", "mypy==0.670", "isort==4.3.15"]
+        "testing": ["black==19.10b0", "flake8==3.7.7", "mypy==0.781", "isort==4.3.15"]
     },
     python_requires=">=3.6",
     classifiers=[

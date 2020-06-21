@@ -23,7 +23,7 @@ class TestChromeWebStore(unittest.TestCase):
         u = self.api.users(
             "gcjejnlljikllkloanankijokfbaelhi"
         )  # Twitter Background Restorer
-        match = re.search(r"^(\d+|\d{1,3}(,\d{3})*)(\.\d+)?$", u)
+        match = re.search(r"^(\d)+(,)+(\d)*(\+)*$", u)
         self.assertTrue(match)
         self.assertEqual(match.group(0), u)
 

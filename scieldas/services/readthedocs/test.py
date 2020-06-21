@@ -11,7 +11,7 @@ class TestReadTheDocs(unittest.TestCase):
         self.assertIn(s, ["pass", "fail"])
 
     def test_build_status_with_version(self):
-        s = self.api.build_status("crate", version="3.2")
+        s = self.api.build_status("crate", version="3.3")
         self.assertIn(s, ["pass", "fail"])
 
     def test_downloads_invalid_project(self):
