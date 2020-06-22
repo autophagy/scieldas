@@ -4,11 +4,12 @@ import time
 from flask import current_app
 from scieldas.models.github_oauth_tokens import refresh_github_oauth
 from scieldas.services import Service
-from scieldas.shields import TextShield
+from scieldas.shields import StateShield, TextShield
 
-from .api import Github
+from .api import Github, GithubWorkflows
 
 api = Github()
+workflowApi = GithubWorkflows()
 time_since_refresh = time.time()
 
 
@@ -167,3 +168,17 @@ class PullRequests(Service):
         return self.Response(
             api.pull_requests(owner, repo, state, token()), {"prefix": prefix}
         )
+
+
+class WorkflowStatus(Service):
+    name = "Github Workflow Status"
+    example = "Passing"
+    shield = StateShield(
+        {"passing": "Passing", "failing": "failing"}, prefix="Workflow"
+    )
+    base = "github"
+    routes = ["workflow/status/:owner/:repo/:workflow"]
+
+    def route(self, owner, repo, workflow):
+        status = workflowApi.workflow_status(owner, repo, workflow, token())
+        return self.Response(status, {"prefix": workflow})

@@ -1,4 +1,6 @@
 from typing import Dict, Optional
+from xml.dom.minidom import Document
+from xml.parsers.expat import ExpatError
 
 from pydash import get
 from scieldas.api import API
@@ -157,3 +159,22 @@ class Github(ServiceAPI):
             }
         )
         return issues.get("total_count")
+
+
+class GithubWorkflows(ServiceAPI):
+    base_url = "https://github.com/"
+    deserializer = "xml"
+
+    @ServiceAPI.call
+    def workflow_status(
+        self, owner: str, repo: str, workflow: str, token: str, api: API
+    ):
+        try:
+            doc: Document = api.add(owner).add(repo).add("workflows").add(workflow).add(
+                "badge.svg"
+            ).get()
+            if not isinstance(doc, Document):
+                return None
+            return doc.getElementsByTagName("tspan")[3].firstChild.nodeValue
+        except ExpatError:
+            return None

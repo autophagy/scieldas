@@ -2,12 +2,13 @@ import re
 import unittest
 from os import environ
 
-from .api import Github
+from .api import Github, GithubWorkflows
 
 
 class TestGithub(unittest.TestCase):
     token = environ.get("GITHUB_API_KEY")
     api = Github()
+    workflowApi = GithubWorkflows()
 
     def test_watchers(self):
         w = self.api.watchers("crate", "crate", self.token)
@@ -180,3 +181,27 @@ class TestGithub(unittest.TestCase):
     def test_pull_requests_invalid_state(self):
         p = self.api.pull_requests("crate", "crate", "half-open", self.token)
         self.assertEqual(p, 0)
+
+    def test_workflow_status(self):
+        s = self.workflowApi.workflow_status(
+            "autophagy", "hlaf", "Continuous Integration", self.token
+        )
+        self.assertIn(s, ["passing", "failing"])
+
+    def test_workflow_status_invalid_owner(self):
+        s = self.workflowApi.workflow_status(
+            "user_doesnt_exist", "hlaf", "Continuous Integration", self.token
+        )
+        self.assertIsNone(s)
+
+    def test_workflow_status_invalid_repo(self):
+        s = self.workflowApi.workflow_status(
+            "autophagy", "fake_repo", "Continuous Integration", self.token
+        )
+        self.assertIsNone(s)
+
+    def test_workflow_status_invalid_workflow(self):
+        s = self.workflowApi.workflow_status(
+            "autophagy", "hlaf", "Continuous Disintegration", self.token
+        )
+        self.assertIsNone(s)
