@@ -7,14 +7,7 @@
 [![MIT License](https://scieldas.autophagy.io/misc/licenses/mit.png)](LICENSE)
 
 [Scieldas](https://scieldas.autophagy.io) is a service to provide metadata badges for open source project
-READMEs, inspired by [Shields.io](https://shields.io). It currently supports:
-
-  - **Read The Docs** :: Build status of the Latest tag.
-  - **Travis CI** :: Build status of the last build.
-  - **PyPI** :: Version of project and supported python versions.
-  - **Docker Hub** :: Status of the latest build.
-  - **Licenses** :: The license of the project.
-  - **Styles** :: The autoformatted code style of the project.
+READMEs, inspired by [Shields.io](https://shields.io).
 
 Built with Flask and Docker.
 
