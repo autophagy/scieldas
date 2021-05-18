@@ -5,7 +5,7 @@ RUN apt-get update \
  && mkdir -p /usr/share/man/man7 \
  && apt-get -y install gcc libpq-dev python3-cairosvg wget curl python3-pil fontconfig make postgresql
 
-RUN wget -O Inconsolata.ttf https://raw.github.com/google/fonts/master/ofl/inconsolata/Inconsolata-Regular.ttf \
+RUN wget -O Inconsolata.ttf https://raw.github.com/google/fonts/master/ofl/inconsolata/static/Inconsolata-Regular.ttf \
  && mv Inconsolata.ttf /usr/share/fonts/truetype \
  && fc-cache -fv
 
