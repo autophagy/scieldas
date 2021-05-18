@@ -21,7 +21,7 @@ setup(
         "Flask==1.0",
         "requests==2.21.0",
         "svgwrite==1.1.11",
-        "gunicorn==19.9.0",
+        "gunicorn==20.1.0",
         "CairoSVG==2.1.1",
         "requests-cache==0.4.13",
         "gevent==1.4.0",
